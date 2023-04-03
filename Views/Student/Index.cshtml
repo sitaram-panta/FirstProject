@@ -1,0 +1,31 @@
+﻿@model List<Student>
+
+    <h1 class="text-center text-primary">List of a students</h1>
+    <div>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>class</th>
+            <th>Actions</th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Age</td>
+                <td>@item.Class</td>
+                <td>
+                    <a href="/Student/Edit/@item.Id"><i>Edit</i></a>
+                    <a href="/Student/Delete/@item.Id"><i>Delete</i></a>
+                </td>
+            </tr>
+        }
+
+              
+    </table>
+
+
+    </div>

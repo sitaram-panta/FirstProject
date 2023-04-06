@@ -21,6 +21,31 @@ namespace FirstProject.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("FirstProject.Models.College", b =>
+                {
+                    b.Property<int>("CollegeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CollegeId"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CollegeId");
+
+                    b.ToTable("College");
+                });
+
             modelBuilder.Entity("FirstProject.Models.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -35,13 +60,29 @@ namespace FirstProject.Migrations
                     b.Property<int>("Class")
                         .HasColumnType("int");
 
+                    b.Property<int>("CollegeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CollegeId");
+
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("FirstProject.Models.Student", b =>
+                {
+                    b.HasOne("FirstProject.Models.College", "College")
+                        .WithMany()
+                        .HasForeignKey("CollegeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("College");
                 });
 #pragma warning restore 612, 618
         }

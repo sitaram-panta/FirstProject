@@ -13,6 +13,8 @@ namespace FirstProject.Data
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=MyDatabase;Integrated Security=true");
         }
+
+        public DbSet<FirstProject.Models.College> College { get; set; } = default!;
     }
 
 
